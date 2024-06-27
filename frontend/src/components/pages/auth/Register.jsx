@@ -35,7 +35,6 @@ export default function Register() {
   }
 
   function handleSubmit(e) {
-    console.log(user);
     e.preventDefault();
     register(user);
   }

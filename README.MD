@@ -1,4 +1,4 @@
-<p align="center"><img src="./frontend/public/images/DevNotes.png" width="400" alt="Logo do aplicativo"></p>
+<p align="center"><img src="./frontend/public/images/DevNotes.webp" width="400" alt="Logo do aplicativo"></p>
 
 ## About the project:
 
@@ -70,6 +70,10 @@ npm start
 
 ## Updates:
 
+- 0.1.1 - 📝 authentication via token
+  - Creation of the token logistics.
+  - Create login function
+  - Starting the dashboard page.
 - 0.1.0 - 📝📦️ Register user
   - Creation of the front and back functions in register.
   - Add new lib(font-awesome)

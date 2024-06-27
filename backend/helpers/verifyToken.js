@@ -1,10 +1,13 @@
 import jwt from "jsonwebtoken";
-import getToken from "./getToken";
+import getToken from "./getToken.js";
 
 const verifyToken = (req, res, next) => {
   try {
     if (!req.headers.authorization) {
-      return res.status(401).json({ message: "Unauthorized access." });
+      return res.status(401).json({
+        message: "Unauthorized access.",
+        type: "error",
+      });
     }
 
     const token = getToken(req);
@@ -13,7 +16,16 @@ const verifyToken = (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(400).json({ message: "Invalid token." });
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({
+        message: "Token expired.",
+        type: "error",
+      });
+    }
+    res.status(400).json({
+      message: "Invalid token.",
+      type: "error",
+    });
   }
 };
 

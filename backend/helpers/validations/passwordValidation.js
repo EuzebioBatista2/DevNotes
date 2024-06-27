@@ -19,6 +19,11 @@ const passwordValidation = async (password, confirmPassword) => {
     return "Passwords should not contain space.";
   }
 
+  const lowercaseRegex = /[a-z]/;
+  if (!lowercaseRegex.test(password)) {
+    return "Password should contain at least one lowercase letter.";
+  }
+
   const uppercaseRegex = /[A-Z]/;
   if (!uppercaseRegex.test(password)) {
     return "Password should contain at least one uppercase letter.";

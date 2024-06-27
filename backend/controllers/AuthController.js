@@ -8,8 +8,50 @@ import User from "../models/User.js";
 import createToken from "../helpers/createToken.js";
 
 class AuthController {
-  static login(req, res) {
-    res.json();
+  static async login(req, res) {
+    const { email, password, remember } = req.body;
+
+    const validEmail = await emailValidation(email);
+    if (validEmail !== "Valid email.") {
+      return res.status(422).json({
+        message: validEmail,
+        type: "error",
+      });
+    }
+
+    const validPasword = await passwordValidation(password, password);
+    if (validPasword !== "Valid password.") {
+      return res.status(422).json({
+        message: validPasword,
+        type: "error",
+      });
+    }
+
+    let authUser = await User.findOne({ email: email });
+    if (!authUser) {
+      return res.status(422).json({
+        message: "Email or password doesn't match.",
+        type: "error",
+      });
+    }
+
+    const authPassword = await bcrypt.compare(password, authUser.password);
+    if (!authPassword) {
+      return res.status(422).json({
+        message: "Email or password doesn't match.",
+        type: "error",
+      });
+    }
+
+    if (remember === true) {
+      authUser.remember = remember;
+      await authUser.save();
+    } else {
+      authUser.remember = false;
+      await authUser.save();
+    }
+
+    await createToken(authUser, req, res);
   }
 
   static async register(req, res) {
@@ -27,6 +69,15 @@ class AuthController {
     if (validEmail !== "Valid email.") {
       return res.status(422).json({
         message: validEmail,
+        type: "error",
+      });
+    }
+
+    const existEmail = await User.findOne({ email: email });
+
+    if (existEmail) {
+      return res.status(409).json({
+        message: "Email already exists.",
         type: "error",
       });
     }
@@ -57,6 +108,18 @@ class AuthController {
         type: "error",
       });
     }
+  }
+
+  static async authUser(req, res) {
+    const data = await req.user;
+
+    res.status(200).json({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+      },
+    });
   }
 }
 

@@ -19,6 +19,7 @@ const User = mongoose.model(
       },
       remember: {
         type: Boolean,
+        default: false,
       },
       notes: {
         type: Array,
