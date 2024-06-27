@@ -1,12 +1,12 @@
 <p align="center"><img src="./frontend/public/images/DevNotes.png" width="400" alt="Logo do aplicativo"></p>
 
-## About the project
+## About the project:
 
 Project created with the goal of writing notes about commands and reviews.
 
 > The main objective of this project is to help people save their notes and use the app to access them anywhere.
 
-## Resources used
+## Resources used:
 
 > Frontend:
 
@@ -16,6 +16,7 @@ Project created with the goal of writing notes about commands and reviews.
 - Axios
 - React-router-dom
 - Events
+- Font-awesome(Icons)
 
 > Backend:
 
@@ -45,7 +46,7 @@ npm install
 npm install
 ```
 
-## Running project
+## Running project:
 
 > Frontend:
 
@@ -63,18 +64,22 @@ npm start
 
 - http://localhost:5000/
 
-## Project images
+## Project images:
 
 - Coming soon
 
-## Updates
+## Updates:
 
+- 0.1.0 - 📝📦️ Register user
+  - Creation of the front and back functions in register.
+  - Add new lib(font-awesome)
+  - Token configs
 - 0.1.0 - 📦️ Project base
   - Creation of the frontend and backend base
 - 0.0.1 - 🎉 Initial project
   - Initial project.
 
-## Informações adicionais
+## Additional informations:
 
 Euzebio Batista [@Linkedin](https://www.linkedin.com/in/euzebio-batista) - euzebio.batista2@gmail.com
 
