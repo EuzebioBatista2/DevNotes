@@ -1,25 +1,18 @@
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
 
-const User = mongoose.model(
-  "User",
+const { Schema } = mongoose;
+
+const Folder = mongoose.model(
+  "Folder",
   new Schema(
     {
       name: {
         type: String,
         require: true,
       },
-      email: {
+      userId: {
         type: String,
         require: true,
-      },
-      password: {
-        type: String,
-        require: true,
-      },
-      remember: {
-        type: Boolean,
-        default: false,
       },
       folders: {
         type: Array,
@@ -29,4 +22,4 @@ const User = mongoose.model(
   )
 );
 
-export default User;
+export default Folder;

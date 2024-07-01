@@ -3,7 +3,7 @@ const nameValidation = async (name) => {
     return "Name is required.";
   }
 
-  if (name.length < 4) {
+  if (name.length < 3) {
     return "At least 3 letters are required.";
   }
 

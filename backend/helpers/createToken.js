@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const createToken = async (user, req, res) => {
-  let expire = "30s";
+  let expire = "2h";
   if (user.remember && user.remember === true) {
     expire = "30d";
   }

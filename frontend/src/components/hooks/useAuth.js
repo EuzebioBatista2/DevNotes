@@ -27,7 +27,7 @@ export default function useAuth() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate("dashboard");
+      navigate("dashboard/folders");
     }
   }
 
@@ -51,7 +51,7 @@ export default function useAuth() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate("dashboard");
+      navigate("dashboard/folders");
     }
   }
 

@@ -26,12 +26,12 @@ import { faBriefcase, faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import { useContext, useState } from "react";
-import { Context } from "../../context/UserConext";
+import Context from "../../context/UserContext.jsx";
 
 export default function Login() {
   const [user, setUser] = useState({});
   const { login } = useContext(Context);
-  
+
   function handleChange(e) {
     e.preventDefault();
     setUser({ ...user, [e.target.name]: e.target.value });

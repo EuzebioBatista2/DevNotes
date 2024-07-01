@@ -17,6 +17,7 @@ Project created with the goal of writing notes about commands and reviews.
 - React-router-dom
 - Events
 - Font-awesome(Icons)
+- SunEditor-react
 
 > Backend:
 
@@ -70,16 +71,21 @@ npm start
 
 ## Updates:
 
+- 0.2.0 - 📝📦️ Folders page
+  - Creation of folders page.
+  - Create/Read/Update/Delete folder.
+  - Env routes.
+  - Nav container.
 - 0.1.1 - 📝 authentication via token
   - Creation of the token logistics.
-  - Create login function
+  - Create login function.
   - Starting the dashboard page.
 - 0.1.0 - 📝📦️ Register user
   - Creation of the front and back functions in register.
-  - Add new lib(font-awesome)
-  - Token configs
+  - Add new lib(font-awesome).
+  - Token configs.
 - 0.1.0 - 📦️ Project base
-  - Creation of the frontend and backend base
+  - Creation of the frontend and backend base.
 - 0.0.1 - 🎉 Initial project
   - Initial project.
 

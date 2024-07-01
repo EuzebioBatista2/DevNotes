@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 
 import createToken from "../helpers/createToken.js";
+import Folder from "../models/Folder.js";
 
 class AuthController {
   static async login(req, res) {
@@ -99,7 +100,14 @@ class AuthController {
       password: passwordHash,
     });
 
+    const foldersContainer = new Folder({
+      name,
+      userId: userModel._id,
+      folders: [],
+    });
+
     try {
+      await foldersContainer.save();
       const newUser = await userModel.save();
       await createToken(newUser, req, res);
     } catch (error) {
@@ -118,6 +126,7 @@ class AuthController {
         id: data.id,
         name: data.name,
         email: data.email,
+        folders: data.folders,
       },
     });
   }

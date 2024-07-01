@@ -58,7 +58,7 @@ export const Buttons = styled.div`
   gap: 20px;
 `;
 
-export const LoginButton = styled.button.attrs({ type: "submit" })`
+export const RegisterButton = styled.button.attrs({ type: "submit" })`
   height: 40px;
   width: 140px;
   background-color: #deb1a0;

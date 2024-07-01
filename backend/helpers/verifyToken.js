@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import getToken from "./getToken.js";
+import User from "../models/User.js";
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   try {
     if (!req.headers.authorization) {
       return res.status(401).json({
@@ -12,7 +13,13 @@ const verifyToken = (req, res, next) => {
 
     const token = getToken(req);
     const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
-    req.user = decoded;
+    const user = await User.findById(decoded.id);
+    req.user = {
+      id: decoded.id,
+      name: decoded.name,
+      email: decoded.email,
+      folders: user.folders.length > 0 ? user.folders : [],
+    };
 
     next();
   } catch (error) {

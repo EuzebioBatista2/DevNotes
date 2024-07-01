@@ -12,7 +12,7 @@ import {
   IconsContainer,
   LightText,
   LinkButton,
-  LoginButton,
+  RegisterButton,
   RegisterContainer,
   TextContainer,
   Title,
@@ -23,7 +23,7 @@ import { faBriefcase, faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import { useContext, useState } from "react";
-import { Context } from "../../context/UserConext";
+import Context from "../../context/UserContext.jsx";
 
 export default function Register() {
   const [user, setUser] = useState({});
@@ -83,7 +83,7 @@ export default function Register() {
               handelOnChange={handleChange}
             />
             <Buttons>
-              <LoginButton>Register</LoginButton>
+              <RegisterButton>Register</RegisterButton>
               <LinkButton to="/login">Sign in</LinkButton>
             </Buttons>
           </AuthForm>
