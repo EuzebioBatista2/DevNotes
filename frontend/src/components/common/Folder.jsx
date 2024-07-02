@@ -45,7 +45,7 @@ export default function Folder({ id, name, color }) {
   return (
     <ContainerIcon>
       <MainLink
-        to={`/dashboard/folders/${id}`}
+        to={`/dashboard/files/${id}`}
         onMouseEnter={handleChangeIconOpen}
         onMouseLeave={handleChangeIconClosed}
         color={color}

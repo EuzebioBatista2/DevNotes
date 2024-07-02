@@ -71,6 +71,9 @@ npm start
 
 ## Updates:
 
+- 0.2.1 - 📝 Files page
+  - get all files.
+  - create file.
 - 0.2.0 - 📝📦️ Folders page
   - Creation of folders page.
   - Create/Read/Update/Delete folder.

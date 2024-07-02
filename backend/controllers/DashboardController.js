@@ -182,6 +182,115 @@ class DashboardController {
       });
     }
   }
+
+  static async getFiles(req, res) {
+    const { ObjectId } = mongoose.Types;
+    const folderId = req.params.folderId;
+
+    if (!ObjectId.isValid(folderId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const userData = await Folder.findOne(
+      {
+        userId: user.id,
+        folders: { $elemMatch: { _id: folderId } },
+      },
+      { "folders.$": 1 }
+    );
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+
+    const response = userData.folders[0].files;
+
+    res.status(200).json({
+      files: response,
+    });
+  }
+
+  static async verifyFolder(req, res) {
+    const { ObjectId } = mongoose.Types;
+    const folderId = req.params.folderId;
+
+    if (!ObjectId.isValid(folderId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const userData = await Folder.findOne({
+      userId: user.id,
+      folders: { $elemMatch: { _id: folderId } },
+    });
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+  }
+
+  static async createFile(req, res) {
+    const { ObjectId } = mongoose.Types;
+    const folderId = req.params.folderId;
+
+    if (!ObjectId.isValid(folderId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+    const { name } = req.body;
+    const user = req.user;
+    const userData = await Folder.findOne({
+      userId: user.id,
+      folders: { $elemMatch: { _id: folderId } },
+    });
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+
+    const folderIndex = userData.folders.findIndex(
+      (folder) => folder._id.toString() === folderId
+    );
+
+    const file = {
+      id: new ObjectId(),
+      name,
+      content: "",
+    };
+
+    userData.folders[folderIndex].files.push(file);
+
+    try {
+      await Folder.findOneAndUpdate({ userId: user.id }, userData);
+      res.status(201).json({
+        message: "File created",
+        type: "success",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        type: "error",
+      });
+    }
+  }
 }
 
 export default DashboardController;

@@ -6,8 +6,17 @@ const Context = createContext({});
 
 function UserProvider({ children }) {
   const { register, login, authenticated } = useAuth();
-  const { newFolder, getFolder, editFolder, deleteFolder } = useFolder();
-  const [activatedFile, setActivatedFile] = useState();
+  const {
+    newFolder,
+    getFolder,
+    editFolder,
+    deleteFolder,
+    getFiles,
+    verifyFolder,
+    newFile,
+  } = useFolder();
+  const [activatedFile, setActivatedFile] = useState(null);
+  const [content, setContent] = useState("");
 
   return (
     <Context.Provider
@@ -21,6 +30,11 @@ function UserProvider({ children }) {
         getFolder,
         editFolder,
         deleteFolder,
+        getFiles,
+        verifyFolder,
+        newFile,
+        content,
+        setContent,
       }}
     >
       {children}

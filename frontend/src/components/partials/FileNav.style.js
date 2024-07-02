@@ -24,7 +24,7 @@ export const FilesContainer = styled.div`
   transform: rotateX(180deg);
 
   &::-webkit-scrollbar {
-    background: #555555;
+    background: #303030;
     height: 4px;
     width: 30%;
   }
@@ -42,19 +42,33 @@ export const AddContainer = styled.div`
   height: 100%;
 `;
 
-export const AddLink = styled(Link)`
-  display: flex;
-  height: 20px;
-  width: 20px;
-`;
-
 export const Icon = styled(FontAwesomeIcon)`
   height: 20px;
   width: 20px;
   color: #fff;
+`;
+
+export const Text = styled.p`
+  font-size: 16px;
+  color: #fff;
+  transform: rotateX(180deg);
+`;
+
+export const AddLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+  text-decoration: none;
+  gap: 5px;
   transition: 300ms ease;
 
-  &:hover {
+  &:hover ${Icon} {
+    color: #ffecaa;
+  }
+
+  &:hover ${Text} {
     color: #ffecaa;
   }
 `;

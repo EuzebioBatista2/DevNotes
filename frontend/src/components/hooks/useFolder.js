@@ -50,6 +50,7 @@ export default function useFolder() {
       msgText = error.response.data.message;
       type = error.response.data.type;
       setFlashMessage(msgText, type);
+      navigate("dashboard/folders");
     }
   }
 
@@ -111,5 +112,79 @@ export default function useFolder() {
     }
   }
 
-  return { newFolder, editFolder, getFolder, deleteFolder };
+  async function getFiles(folderId) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+    try {
+      const response = await devNotesApi.get(`/dashboard/files/${folderId}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      });
+      return response.data.files;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+      setFlashMessage(msgText, type);
+      navigate("dashboard/folders");
+    }
+  }
+
+  async function verifyFolder(folderId) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+    try {
+      await devNotesApi.get(`/dashboard/verifyfolder/${folderId}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      });
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+      setFlashMessage(msgText, type);
+      navigate("dashboard/folders");
+    }
+  }
+
+  async function newFile(folderId, file) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+
+    try {
+      const data = await devNotesApi
+        .post(`/dashboard/files/createfile/${folderId}`, file, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        })
+        .then((response) => {
+          return response.data;
+        });
+
+      msgText = data.message;
+      type = data.type;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+    }
+
+    setFlashMessage(msgText, type);
+    if (type === "success") {
+      navigate(`dashboard/files/${folderId}`);
+    }
+  }
+
+  return {
+    newFolder,
+    editFolder,
+    getFolder,
+    deleteFolder,
+    getFiles,
+    verifyFolder,
+    newFile,
+  };
 }
