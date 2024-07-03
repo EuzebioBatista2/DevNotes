@@ -45,14 +45,14 @@ export default function EditFolder() {
   useEffect(() => {
     async function fetchData() {
       const data = await authenticated(token);
-      await setUser(data);
+      setUser(data);
 
       const folder = await getFolder(id);
-      await setFolder(folder);
+      setFolder(folder);
     }
 
     fetchData();
-  }, [token, authenticated]);
+  }, [token]);
 
   return (
     <DashboardLayout>

@@ -14,9 +14,10 @@ function UserProvider({ children }) {
     getFiles,
     verifyFolder,
     newFile,
+    editFile,
+    deleteFile,
   } = useFolder();
-  const [activatedFile, setActivatedFile] = useState(null);
-  const [content, setContent] = useState("");
+  const [activatedFile, setActivatedFile] = useState(0);
 
   return (
     <Context.Provider
@@ -33,8 +34,8 @@ function UserProvider({ children }) {
         getFiles,
         verifyFolder,
         newFile,
-        content,
-        setContent,
+        editFile,
+        deleteFile,
       }}
     >
       {children}

@@ -44,7 +44,7 @@ export default function NewFolder() {
     async function fetchData() {
       const data = await authenticated(token);
       setFolder({ userId: data.id, color: color });
-      await setUser(data);
+      setUser(data);
     }
 
     fetchData();

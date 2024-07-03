@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
+export const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const NavContainer = styled.nav`
   display: flex;
   position: relative;
@@ -80,4 +86,15 @@ export const Line = styled.hr`
   border: 1px solid #fff;
   bottom: 0px;
   z-index: 1;
+`;
+
+export const TextEditorContainer = styled.div`
+  flex: 1;
+`;
+
+export const EmptyFileContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

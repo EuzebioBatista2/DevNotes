@@ -71,9 +71,13 @@ npm start
 
 ## Updates:
 
+- 0.3.1 - 📝 Actions on files page
+  - File cache.
+  - Update file.
+  - Delete file.
 - 0.2.1 - 📝 Files page
-  - get all files.
-  - create file.
+  - Get all files.
+  - Create file.
 - 0.2.0 - 📝📦️ Folders page
   - Creation of folders page.
   - Create/Read/Update/Delete folder.

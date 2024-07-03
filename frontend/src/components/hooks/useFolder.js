@@ -31,7 +31,7 @@ export default function useFolder() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate("dashboard/folders");
+      navigate("/dashboard/folders");
     }
   }
 
@@ -50,7 +50,7 @@ export default function useFolder() {
       msgText = error.response.data.message;
       type = error.response.data.type;
       setFlashMessage(msgText, type);
-      navigate("dashboard/folders");
+      navigate("/dashboard/folders");
     }
   }
 
@@ -79,7 +79,7 @@ export default function useFolder() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate("dashboard/folders");
+      navigate("/dashboard/folders");
     }
   }
 
@@ -108,7 +108,7 @@ export default function useFolder() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate("dashboard/folders");
+      navigate("/dashboard/folders");
     }
   }
 
@@ -127,7 +127,7 @@ export default function useFolder() {
       msgText = error.response.data.message;
       type = error.response.data.type;
       setFlashMessage(msgText, type);
-      navigate("dashboard/folders");
+      navigate("/dashboard/folders");
     }
   }
 
@@ -145,7 +145,7 @@ export default function useFolder() {
       msgText = error.response.data.message;
       type = error.response.data.type;
       setFlashMessage(msgText, type);
-      navigate("dashboard/folders");
+      navigate("/dashboard/folders");
     }
   }
 
@@ -174,7 +174,66 @@ export default function useFolder() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate(`dashboard/files/${folderId}`);
+      navigate(`/dashboard/files/${folderId}`);
+    }
+  }
+
+  async function editFile(folderId, file) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+
+    try {
+      const data = await devNotesApi
+        .post(`/dashboard/files/editfile/${folderId}`, file, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        })
+        .then((response) => {
+          return response.data;
+        });
+
+      msgText = data.message;
+      type = data.type;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+    }
+
+    setFlashMessage(msgText, type);
+  }
+
+  async function deleteFile(folderId, fileId) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+
+    try {
+      const data = await devNotesApi
+        .delete(`/dashboard/files/deleteFile/${folderId}/${fileId}`, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        })
+        .then((response) => {
+          return response.data;
+        });
+
+      msgText = data.message;
+      type = data.type;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+    }
+
+    setFlashMessage(msgText, type);
+    if (type === "success") {
+      navigate(`/dashboard/files/${folderId}`);
+      localStorage.removeItem("devNotes@files");
+      window.location.reload();
+    } else if (type === "error") {
+      navigate("/dashboard/folders");
     }
   }
 
@@ -186,5 +245,7 @@ export default function useFolder() {
     getFiles,
     verifyFolder,
     newFile,
+    editFile,
+    deleteFile,
   };
 }

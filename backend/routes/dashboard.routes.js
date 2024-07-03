@@ -15,6 +15,16 @@ router.post(
   verifyToken,
   DashboardController.createFile
 );
+router.post(
+  "/files/editfile/:folderId",
+  verifyToken,
+  DashboardController.editFile
+);
+router.delete(
+  "/files/deletefile/:folderId/:fileId",
+  verifyToken,
+  DashboardController.deleteFile
+);
 
 router.get("/editfolder/:id", verifyToken, DashboardController.getFolder);
 router.post("/editfolder", verifyToken, DashboardController.editFolder);

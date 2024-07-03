@@ -6,6 +6,7 @@ export const Nav = styled.nav`
   flex-direction: row;
   align-items: center;
   height: 30px;
+  min-height: 30px;
   width: 100%;
   background-color: #232323;
   padding: 0px 40px;

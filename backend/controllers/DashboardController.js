@@ -252,6 +252,7 @@ class DashboardController {
         type: "error",
       });
     }
+
     const { name } = req.body;
     const user = req.user;
     const userData = await Folder.findOne({
@@ -271,7 +272,7 @@ class DashboardController {
     );
 
     const file = {
-      id: new ObjectId(),
+      _id: new ObjectId(),
       name,
       content: "",
     };
@@ -282,6 +283,110 @@ class DashboardController {
       await Folder.findOneAndUpdate({ userId: user.id }, userData);
       res.status(201).json({
         message: "File created",
+        type: "success",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        type: "error",
+      });
+    }
+  }
+
+  static async editFile(req, res) {
+    const { ObjectId } = mongoose.Types;
+    const folderId = req.params.folderId;
+    const { id, content } = req.body;
+
+    if (!ObjectId.isValid(folderId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const userData = await Folder.findOne({
+      userId: user.id,
+      folders: { $elemMatch: { _id: folderId } },
+    });
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+
+    const folderIndex = userData.folders.findIndex(
+      (folder) => folder._id.toString() === folderId
+    );
+
+    const fileIndex = userData.folders[folderIndex].files.findIndex(
+      (file) => file._id.toString() === id
+    );
+
+    userData.folders[folderIndex].files[fileIndex].content = content;
+
+    try {
+      await Folder.findOneAndUpdate({ userId: user.id }, userData);
+      res.status(200).json({
+        message: "File updated successfully!",
+        type: "success",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        type: "error",
+      });
+    }
+  }
+
+  static async deleteFile(req, res) {
+    const { ObjectId } = mongoose.Types;
+    const { folderId, fileId } = req.params;
+
+    if (!ObjectId.isValid(folderId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    if (!ObjectId.isValid(fileId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const userData = await Folder.findOne({
+      userId: user.id,
+      folders: { $elemMatch: { _id: folderId } },
+    });
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder or file not found.",
+        type: "error",
+      });
+    }
+
+    const folderIndex = userData.folders.findIndex(
+      (folder) => folder._id.toString() === folderId
+    );
+
+    const fileIndex = userData.folders[folderIndex].files.findIndex(
+      (file) => file._id.toString() === fileId
+    );
+
+    userData.folders[folderIndex].files.splice(fileIndex, 1);
+
+    try {
+      await Folder.findOneAndUpdate({ userId: user.id }, userData);
+      res.status(200).json({
+        message: "File deleted successfully!",
         type: "success",
       });
     } catch (error) {

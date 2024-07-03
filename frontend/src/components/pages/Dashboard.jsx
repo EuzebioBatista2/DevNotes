@@ -24,11 +24,11 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchData() {
       const data = await authenticated(token);
-      await setUser(data);
+      setUser(data);
     }
 
     fetchData();
-  }, [token, authenticated]);
+  }, [token]);
 
   return (
     <DashboardLayout>

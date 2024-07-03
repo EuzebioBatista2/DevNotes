@@ -70,7 +70,7 @@ export default function useAuth() {
     } catch (error) {
       const msgText = error.response.data.message;
       const type = error.response.data.type;
-
+      localStorage.removeItem("devNotes@files");
       setFlashMessage(msgText, type);
       navigate("/login");
     }

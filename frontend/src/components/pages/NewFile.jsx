@@ -38,7 +38,7 @@ export default function NewFile() {
   useEffect(() => {
     async function fetchData() {
       const data = await authenticated(token);
-      await setUser(data);
+      setUser(data);
       await verifyFolder(folderId);
     }
 

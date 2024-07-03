@@ -1,8 +1,30 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SunEditor from "suneditor-react";
+import Context from "../context/UserContext";
+import { useParams } from "react-router-dom";
 
-export default function TextEditor({ data }) {
-  const [content, setContent] = useState("");
+export default function TextEditor({ id }) {
+  const { editFile } = useContext(Context);
+  const { folderId } = useParams();
+  const [text] = useState(
+    JSON.parse(localStorage.getItem("devNotes@files"))[id]?.content || ""
+  );
+
+  function handleText(newContent) {
+    const files = JSON.parse(localStorage.getItem("devNotes@files"));
+    files[id] = { content: newContent };
+    localStorage.setItem("devNotes@files", JSON.stringify(files));
+  }
+
+  function saveToDatabase() {
+    const content = JSON.parse(localStorage.getItem("devNotes@files"))[id]
+      .content;
+    const file = {
+      id: id,
+      content: content,
+    };
+    editFile(folderId, file);
+  }
 
   const editorConfig = {
     buttonList: [
@@ -12,7 +34,9 @@ export default function TextEditor({ data }) {
       ["fontColor", "hiliteColor"],
       ["list", "align"],
       ["link", "table"],
+      ["save"],
     ],
+    callBackSave: saveToDatabase,
   };
 
   useEffect(() => {
@@ -25,15 +49,13 @@ export default function TextEditor({ data }) {
       sunEditorContainer.style.height = "100%";
       sunEditorText.style.height = "100%";
     }
-
-    setContent(data);
   }, []);
 
   return (
     <SunEditor
       setOptions={editorConfig}
-      setContents={content}
-      onChange={setContent}
+      setContents={text}
+      onChange={handleText}
     />
   );
 }
