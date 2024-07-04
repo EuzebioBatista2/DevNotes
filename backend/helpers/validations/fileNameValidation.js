@@ -1,6 +1,6 @@
-const folderNameValidation = async (name) => {
+const fileNameValidation = async (name) => {
   if (!name) {
-    return "Folder name is required.";
+    return "File name is required.";
   }
 
   if (name.length < 3) {
@@ -14,4 +14,4 @@ const folderNameValidation = async (name) => {
   return "Valid name.";
 };
 
-export default folderNameValidation;
+export default fileNameValidation;

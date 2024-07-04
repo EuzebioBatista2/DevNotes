@@ -6,4 +6,8 @@ export const Container = styled.section`
   height: 100%;
   min-height: 600px;
   width: 100%;
+  background-image: url("/images/HomeBackground.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;

@@ -1,5 +1,5 @@
-import { FileContainer } from "./File.style";
+// import { FileContainer } from "./File.style";
 
-export default function File({ children }) {
-  return <FileContainer>{children}</FileContainer>;
-}
+// export default function File({ children }) {
+//   return <FileContainer>{children}</FileContainer>;
+// }

@@ -71,6 +71,11 @@ npm start
 
 ## Updates:
 
+- 0.3.2 - 📝 Profile page
+  - Cretion of profile page.
+  - Change password.
+  - Logout.
+  - Edit file.
 - 0.3.1 - 📝 Actions on files page
   - File cache.
   - Update file.

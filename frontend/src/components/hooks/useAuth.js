@@ -56,10 +56,31 @@ export default function useAuth() {
   }
 
   async function saveToken(token) {
-    await localStorage.setItem("devNotes@token", JSON.stringify(token));
+    localStorage.setItem("devNotes@token", JSON.stringify(token));
+  }
+
+  async function isJson(token) {
+    try {
+      JSON.parse(token);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   async function authenticated(token) {
+    let msgText = "";
+    let type = "";
+    const validToken = await isJson(token);
+
+    if (!validToken) {
+      msgText = "Invalid token.";
+      type = "error";
+      setFlashMessage(msgText, type);
+      navigate("/login");
+      return;
+    }
+
     try {
       const response = await devNotesApi.post("/auth/user", "", {
         headers: {
@@ -68,13 +89,55 @@ export default function useAuth() {
       });
       return response.data.user;
     } catch (error) {
-      const msgText = error.response.data.message;
-      const type = error.response.data.type;
+      msgText = error.response.data.message;
+      type = error.response.data.type;
       localStorage.removeItem("devNotes@files");
       setFlashMessage(msgText, type);
       navigate("/login");
     }
   }
 
-  return { register, login, authenticated };
+  function logout() {
+    const msgText = "Logout successfully, See you soon!";
+    const msgType = "success";
+
+    localStorage.removeItem("devNotes@token");
+    localStorage.removeItem("devNotes@files");
+    navigate("/");
+
+    setFlashMessage(msgText, msgType);
+  }
+
+  async function changePassword(userId, passwords) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+
+    try {
+      const data = await devNotesApi
+        .post(`/auth/changepassword/${userId}`, passwords, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        })
+        .then((response) => {
+          return response.data;
+        });
+
+      msgText = data.message;
+      type = data.type;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+    }
+
+    setFlashMessage(msgText, type);
+    if (type === "success") {
+      localStorage.removeItem("devNotes@token");
+      localStorage.removeItem("devNotes@files");
+      navigate("/login");
+    }
+  }
+
+  return { register, login, authenticated, logout, changePassword };
 }

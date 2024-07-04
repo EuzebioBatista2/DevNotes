@@ -4,7 +4,7 @@ import Context from "../context/UserContext";
 import { useParams } from "react-router-dom";
 
 export default function TextEditor({ id }) {
-  const { editFile } = useContext(Context);
+  const { saveFileContent } = useContext(Context);
   const { folderId } = useParams();
   const [text] = useState(
     JSON.parse(localStorage.getItem("devNotes@files"))[id]?.content || ""
@@ -23,7 +23,7 @@ export default function TextEditor({ id }) {
       id: id,
       content: content,
     };
-    editFile(folderId, file);
+    saveFileContent(folderId, file);
   }
 
   const editorConfig = {

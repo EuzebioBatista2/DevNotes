@@ -5,7 +5,7 @@ import useFolder from "../hooks/useFolder.js";
 const Context = createContext({});
 
 function UserProvider({ children }) {
-  const { register, login, authenticated } = useAuth();
+  const { register, login, authenticated, logout, changePassword } = useAuth();
   const {
     newFolder,
     getFolder,
@@ -14,7 +14,9 @@ function UserProvider({ children }) {
     getFiles,
     verifyFolder,
     newFile,
-    editFile,
+    getFile,
+    saveFileContent,
+    updateFile,
     deleteFile,
   } = useFolder();
   const [activatedFile, setActivatedFile] = useState(0);
@@ -34,8 +36,12 @@ function UserProvider({ children }) {
         getFiles,
         verifyFolder,
         newFile,
-        editFile,
+        getFile,
+        saveFileContent,
+        updateFile,
         deleteFile,
+        logout,
+        changePassword,
       }}
     >
       {children}

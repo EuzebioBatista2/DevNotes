@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const TagFile = styled.div`
   display: flex;
@@ -29,6 +30,23 @@ export const TagFile = styled.div`
 export const FileName = styled.p`
   font-size: 16px;
   color: #555555;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+`;
+
+export const IconLink = styled(Link)`
+  text-decoration: none;
+`;
+
+export const EditIcon = styled(FontAwesomeIcon)`
+  height: 16px;
+  width: 16px;
+  color: #c6950c;
 `;
 
 export const IconButton = styled.button.attrs({ type: "submit" })`

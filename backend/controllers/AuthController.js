@@ -56,7 +56,8 @@ class AuthController {
   }
 
   static async register(req, res) {
-    const { name, email, password, confirmPassword } = req.body;
+    let { name, email, password, confirmPassword } = req.body;
+    name = name.charAt(0).toUpperCase() + name.slice(1);
 
     const validName = await nameValidation(name);
     if (validName !== "Valid name.") {
@@ -129,6 +130,61 @@ class AuthController {
         folders: data.folders,
       },
     });
+  }
+
+  static async changePassword(req, res) {
+    const userId = req.params.userId;
+    const { currentPassword, newPassword, confirmNewPassword } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!currentPassword) {
+      return res.status(422).json({
+        message: "Current password is required.",
+        type: "error",
+      });
+    }
+
+    const validCurrentPassword = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+    if (!validCurrentPassword) {
+      return res.status(422).json({
+        message: "Current password isn't valid.",
+        type: "error",
+      });
+    }
+
+    const validPasword = await passwordValidation(
+      newPassword,
+      confirmNewPassword
+    );
+
+    if (validPasword !== "Valid password.") {
+      return res.status(422).json({
+        message: validPasword,
+        type: "error",
+      });
+    }
+
+    const salt = await bcrypt.genSalt(12);
+    const newPasswordHash = await bcrypt.hash(newPassword, salt);
+
+    user.password = newPasswordHash;
+
+    try {
+      await User.findByIdAndUpdate(userId, user);
+      res.status(200).json({
+        message: "Password updated successfully!",
+        type: "success",
+      });
+    } catch (error) {
+      res.status(200).json({
+        message: error.message,
+        type: "error",
+      });
+    }
   }
 }
 

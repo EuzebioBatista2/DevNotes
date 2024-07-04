@@ -80,6 +80,7 @@ export const LoginButton = styled.button.attrs({ type: "submit" })`
   font-size: 16px;
   border: none;
   transition: opacity 300ms ease;
+  cursor: pointer;
 
   &:hover {
     opacity: 1;

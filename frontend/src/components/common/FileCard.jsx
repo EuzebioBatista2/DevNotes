@@ -1,7 +1,15 @@
 import { useContext } from "react";
-import { FileName, Icon, TagFile, IconButton } from "./FileCard.style";
+import {
+  FileName,
+  Icon,
+  TagFile,
+  IconButton,
+  ButtonsContainer,
+  IconLink,
+  EditIcon,
+} from "./FileCard.style";
 
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import Context from "../context/UserContext";
 import { useParams } from "react-router-dom";
 
@@ -23,11 +31,16 @@ export default function FileCard({ file, activate, handleClick }) {
   return (
     <TagFile onClick={() => handleClick(file)} $activate={activate}>
       <FileName>{file.name}</FileName>
-      <form onSubmit={handleDeleteFile}>
-        <IconButton type="submit">
-          <Icon icon={faCircleXmark} />
-        </IconButton>
-      </form>
+      <ButtonsContainer>
+        <IconLink to={`/dashboard/files/editfile/${folderId}/${file._id}`}>
+          <EditIcon icon={faPenSquare} />
+        </IconLink>
+        <form onSubmit={handleDeleteFile}>
+          <IconButton type="submit">
+            <Icon icon={faCircleXmark} />
+          </IconButton>
+        </form>
+      </ButtonsContainer>
     </TagFile>
   );
 }

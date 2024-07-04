@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import useFlashMessage from "./useFlashMessage";
 import devNotesApi from "../../utils/devNotesApi";
 
@@ -178,14 +178,14 @@ export default function useFolder() {
     }
   }
 
-  async function editFile(folderId, file) {
+  async function saveFileContent(folderId, file) {
     let msgText = "";
     let type = "";
     const token = localStorage.getItem("devNotes@token");
 
     try {
       const data = await devNotesApi
-        .post(`/dashboard/files/editfile/${folderId}`, file, {
+        .post(`/dashboard/files/savefilecontent/${folderId}`, file, {
           headers: {
             Authorization: `Bearer ${JSON.parse(token)}`,
           },
@@ -202,6 +202,58 @@ export default function useFolder() {
     }
 
     setFlashMessage(msgText, type);
+  }
+
+  async function getFile(folderId, fileId) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+
+    try {
+      const response = await devNotesApi.get(
+        `/dashboard/files/editfile/${folderId}/${fileId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        }
+      );
+      return response.data.file;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+      setFlashMessage(msgText, type);
+      navigate(`/dashboard/folders`);
+    }
+  }
+
+  async function updateFile(folderId, file) {
+    let msgText = "";
+    let type = "";
+    const token = localStorage.getItem("devNotes@token");
+
+    try {
+      const data = await devNotesApi
+        .post(`/dashboard/files/updatefile/${folderId}`, file, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        })
+        .then((response) => {
+          return response.data;
+        });
+
+      msgText = data.message;
+      type = data.type;
+    } catch (error) {
+      msgText = error.response.data.message;
+      type = error.response.data.type;
+    }
+
+    setFlashMessage(msgText, type);
+    if (type === "success") {
+      navigate(`/dashboard/files/${folderId}`);
+    }
   }
 
   async function deleteFile(folderId, fileId) {
@@ -245,7 +297,9 @@ export default function useFolder() {
     getFiles,
     verifyFolder,
     newFile,
-    editFile,
+    getFile,
+    saveFileContent,
+    updateFile,
     deleteFile,
   };
 }

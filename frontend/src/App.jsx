@@ -10,6 +10,8 @@ import NewFolder from "./components/pages/NewFolder";
 import EditFolder from "./components/pages/EditFolder";
 import Files from "./components/pages/Files.jsx";
 import NewFile from "./components/pages/NewFile.jsx";
+import Profile from "./components/pages/Profile.jsx";
+import EditFile from "./components/pages/EditFile.jsx";
 
 function App() {
   return (
@@ -18,6 +20,10 @@ function App() {
         <MainLayout>
           <Message />
           <Routes>
+            <Route
+              path="/dashboard/files/editfile/:folderId/:fileId"
+              element={<EditFile />}
+            />
             <Route
               path="/dashboard/files/createfile/:folderId"
               element={<NewFile />}
@@ -31,11 +37,13 @@ function App() {
               path="/dashboard/folders/newfolder"
               element={<NewFolder />}
             />
+            <Route path="/dashboard/profile" element={<Profile />} />
             <Route path="/dashboard/folders" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
+            {/* <Route path="*" element={<NotFound />} */}
           </Routes>
         </MainLayout>
       </UserProvider>

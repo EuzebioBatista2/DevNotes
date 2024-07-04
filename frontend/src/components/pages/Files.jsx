@@ -20,13 +20,15 @@ export default function Files() {
       setUser(data);
       const allFiles = await getFiles(folderId);
       setUserFiles(allFiles);
-      const cacheFiles = allFiles.reduce((acc, item) => {
-        acc[item._id] = {
-          content: `${item.content}`,
-        };
-        return acc;
-      }, {});
-      localStorage.setItem("devNotes@files", JSON.stringify(cacheFiles));
+      if (allFiles) {
+        const cacheFiles = allFiles.reduce((acc, item) => {
+          acc[item._id] = {
+            content: `${item.content}`,
+          };
+          return acc;
+        }, {});
+        localStorage.setItem("devNotes@files", JSON.stringify(cacheFiles));
+      }
     }
 
     fetchData();

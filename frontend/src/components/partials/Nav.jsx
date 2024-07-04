@@ -15,10 +15,10 @@ export default function Nav({ name }) {
       </NavLink>
 
       <AuthContainer>
-        <NavLink to="/profile">
+        <NavLink to="/dashboard/profile">
           <UserName>{name}</UserName>
         </NavLink>
-        <NavLink to="/profile">
+        <NavLink to="/dashboard/profile">
           <ProfileImage src="/images/imageProfile.webp" />
         </NavLink>
       </AuthContainer>

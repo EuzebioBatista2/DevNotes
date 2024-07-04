@@ -12,7 +12,7 @@ const passwordValidation = async (password, confirmPassword) => {
   }
 
   if (password.length < 8) {
-    return "At least 8 letters are required.";
+    return "At least 8 characters are required for the password.";
   }
 
   if (password.indexOf(" ") !== -1) {

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import colorValidation from "../helpers/validations/colorValidation.js";
 import folderNameValidation from "../helpers/validations/folderNameValidation.js";
+import fileNameValidation from "../helpers/validations/fileNameValidation.js";
 import Folder from "../models/Folder.js";
 import User from "../models/User.js";
 class DashboardController {
@@ -142,6 +143,75 @@ class DashboardController {
     }
   }
 
+  static async updateFile(req, res) {
+    const folderId = req.params.folderId;
+    const { _id, name } = req.body;
+
+    const validName = await fileNameValidation(name);
+    if (validName !== "Valid name.") {
+      return res.status(422).json({
+        message: validName,
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const folderData = await Folder.findOne({
+      userId: user.id,
+    });
+
+    if (!folderData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+
+    const userData = await User.findOne({
+      _id: user.id,
+      folders: { $elemMatch: { _id: folderId } },
+    });
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+
+    const folderIndex = folderData.folders.findIndex(
+      (folder) => folder._id.toString() === folderId
+    );
+
+    const fileIndex = folderData.folders[folderIndex].files.findIndex(
+      (file) => file._id.toString() === _id
+    );
+
+    if (fileIndex === -1) {
+      return res.status(404).json({
+        message: "File not found.",
+        type: "error",
+      });
+    }
+
+    folderData.folders[folderIndex].files[fileIndex].name = name;
+    userData.folders[folderIndex].name = name;
+
+    try {
+      await Folder.findOneAndUpdate({ userId: user.id }, folderData);
+      await User.findByIdAndUpdate(user.id, userData);
+      res.status(200).json({
+        message: "File updated successfully!",
+        type: "success",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        type: "error",
+      });
+    }
+  }
+
   static async deleteFolder(req, res) {
     const _id = req.params.id;
 
@@ -217,6 +287,66 @@ class DashboardController {
     });
   }
 
+  static async getFile(req, res) {
+    const { ObjectId } = mongoose.Types;
+    const { folderId, fileId } = req.params;
+
+    if (!ObjectId.isValid(folderId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    if (!ObjectId.isValid(fileId)) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const userData = await Folder.findOne({
+      userId: user.id,
+      folders: { $elemMatch: { _id: folderId } },
+    });
+
+    if (!userData) {
+      return res.status(404).json({
+        message: "Folder not found.",
+        type: "error",
+      });
+    }
+
+    const folderIndex = userData.folders.findIndex(
+      (folder) => folder._id.toString() === folderId
+    );
+
+    const fileIndex = userData.folders[folderIndex].files.findIndex(
+      (file) => file._id.toString() === fileId
+    );
+
+    if (fileIndex === -1) {
+      return res.status(404).json({
+        message: "File not found.",
+        type: "error",
+      });
+    }
+
+    const response = userData.folders[folderIndex].files[fileIndex];
+
+    try {
+      res.status(200).json({
+        file: response,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        type: "error",
+      });
+    }
+  }
+
   static async verifyFolder(req, res) {
     const { ObjectId } = mongoose.Types;
     const folderId = req.params.folderId;
@@ -246,6 +376,8 @@ class DashboardController {
     const { ObjectId } = mongoose.Types;
     const folderId = req.params.folderId;
 
+    const { name } = req.body;
+
     if (!ObjectId.isValid(folderId)) {
       return res.status(400).json({
         message: "Invalid ID",
@@ -253,7 +385,14 @@ class DashboardController {
       });
     }
 
-    const { name } = req.body;
+    const validName = await fileNameValidation(name);
+    if (validName !== "Valid name.") {
+      return res.status(422).json({
+        message: validName,
+        type: "error",
+      });
+    }
+
     const user = req.user;
     const userData = await Folder.findOne({
       userId: user.id,
@@ -293,7 +432,7 @@ class DashboardController {
     }
   }
 
-  static async editFile(req, res) {
+  static async saveFileContent(req, res) {
     const { ObjectId } = mongoose.Types;
     const folderId = req.params.folderId;
     const { id, content } = req.body;
@@ -325,6 +464,13 @@ class DashboardController {
     const fileIndex = userData.folders[folderIndex].files.findIndex(
       (file) => file._id.toString() === id
     );
+
+    if (fileIndex === -1) {
+      return res.status(404).json({
+        message: "File not found.",
+        type: "error",
+      });
+    }
 
     userData.folders[folderIndex].files[fileIndex].content = content;
 

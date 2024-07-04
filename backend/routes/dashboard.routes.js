@@ -4,6 +4,16 @@ import verifyToken from "../helpers/verifyToken.js";
 
 const router = Router();
 
+router.get(
+  "/files/editfile/:folderId/:fileId",
+  verifyToken,
+  DashboardController.getFile
+);
+router.post(
+  "/files/updatefile/:folderId",
+  verifyToken,
+  DashboardController.updateFile
+);
 router.get("/files/:folderId", verifyToken, DashboardController.getFiles);
 router.get(
   "/verifyfolder/:folderId",
@@ -16,9 +26,9 @@ router.post(
   DashboardController.createFile
 );
 router.post(
-  "/files/editfile/:folderId",
+  "/files/savefilecontent/:folderId",
   verifyToken,
-  DashboardController.editFile
+  DashboardController.saveFileContent
 );
 router.delete(
   "/files/deletefile/:folderId/:fileId",

@@ -10,42 +10,38 @@ import {
   LinkButton,
   SubText,
   Title,
-} from "./NewFolder.style";
+} from "./EditFile.style.js";
 import Context from "../context/UserContext.jsx";
 import Nav from "../partials/Nav";
 import DashboardLayout from "../layouts/DashboardLayout";
-import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import Input from "../common/Input";
+import { useParams } from "react-router-dom";
 
-export default function NewFolder() {
-  const { newFolder, authenticated } = useContext(Context);
+export default function EditFile() {
+  const { folderId, fileId } = useParams();
+  const { authenticated, getFile, updateFile } = useContext(Context);
   const [user, setUser] = useState({});
-  const [folder, setFolder] = useState({});
-  const [color, setColor] = useState("#000000");
+  const [file, setFile] = useState({ _id: "", name: "" });
   const [token] = useState(localStorage.getItem("devNotes@token") || "");
 
   function handleChange(e) {
     e.preventDefault();
-    setFolder({ ...folder, [e.target.name]: e.target.value });
-  }
-
-  function handleColorChange(e) {
-    e.preventDefault();
-    setColor(e.target.value);
-    setFolder({ ...folder, color: `${color}` });
+    setFile({ ...file, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    newFolder(folder);
+    updateFile(folderId, file);
   }
 
   useEffect(() => {
     async function fetchData() {
       const data = await authenticated(token);
-      if (data) {
-        setFolder({ userId: data.id, color: color });
+      const dataFile = await getFile(folderId, fileId);
+      if (data && dataFile) {
         setUser(data);
+        setFile({ _id: dataFile._id, name: dataFile.name });
       }
     }
 
@@ -58,30 +54,24 @@ export default function NewFolder() {
       <Container>
         <FormContainer>
           <HeaderContainer>
-            <Icon icon={faFolderPlus} color={color} />
-            <Title>Create your folder</Title>
+            <Icon icon={faFileCircleCheck} />
+            <Title>Edit your file</Title>
           </HeaderContainer>
           <DataContainer onSubmit={handleSubmit}>
             <Input
               type={"text"}
-              text={"Folder name"}
+              text={"File name"}
               name={"name"}
-              placeholder={"Enter the folder name"}
+              value={file.name}
+              placeholder={"Enter the file name"}
               handelOnChange={handleChange}
             />
-            <Input
-              type={"color"}
-              text={"Folder color"}
-              name={"color"}
-              placeholder={"Select the folder color"}
-              handelOnChange={handleColorChange}
-            />
             <Buttons>
-              <AddButton>Create</AddButton>
-              <LinkButton to="/dashboard/folders">Back</LinkButton>
+              <AddButton>Update</AddButton>
+              <LinkButton to={`/dashboard/files/${folderId}`}>Back</LinkButton>
             </Buttons>
           </DataContainer>
-          <SubText>Create a new folder and store your files easily.</SubText>
+          <SubText>Edit the file and write your notes.</SubText>
         </FormContainer>
       </Container>
     </DashboardLayout>
