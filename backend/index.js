@@ -22,10 +22,8 @@ app.use("/dashboard", dashboardRoutes);
 
 mongoDB()
   .then(() => {
-    app.listen({
-      host: "0.0.0.0",
-      port: process.env.PORT ? Number(process.env.PORT) : 5000,
-    });
+    const port = process.env.PORT ? Number(process.env.PORT) : 5000;
+    app.listen(port);
   })
   .catch((error) => {
     console.log(error.message);
