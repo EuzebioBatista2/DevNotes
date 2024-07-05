@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 `;
 
 export const NavContainer = styled.nav`
@@ -13,6 +14,7 @@ export const NavContainer = styled.nav`
   position: relative;
   flex-direction: column;
   height: 36px;
+  min-height: 36px;
   width: 100%;
 `;
 
@@ -64,7 +66,7 @@ export const AddLink = styled(Link)`
   display: flex;
   align-items: center;
   height: 20px;
-  width: 20px;
+  width: 100%;
   margin-left: 10px;
   text-decoration: none;
   gap: 5px;

@@ -7,6 +7,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 45px 50px;
+
+  @media (max-width: 500px) {
+    padding: 45px 30px;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -14,6 +18,12 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 20px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const HeaderText = styled.h2`
@@ -57,10 +67,15 @@ export const FoldersContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
   margin-top: 20px;
   column-gap: 50px;
   row-gap: 10px;
   align-content: flex-start;
+
+  @media (max-width: 500px) {
+    justify-content: space-between;
+  }
 `;
 
 // EmptyMessage

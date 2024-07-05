@@ -8,15 +8,24 @@ export const Container = styled.div`
 `;
 
 export const Icon = styled(FontAwesomeIcon)`
-  height: 48px;
-  width: 48px;
+  height: 60px;
+  width: 60px;
   color: #555555;
+
+  @media (max-width: 500px) {
+    height: 50px;
+    width: 50px;
+  }
 `;
 
 export const Title = styled.h2`
   font-size: 40px;
   color: #555555;
   font-weight: 500;
+
+  @media (max-width: 500px) {
+    font-size: 30px;
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -37,4 +46,8 @@ export const Line = styled.hr`
 export const Text = styled.p`
   font-size: 36px;
   color: #555555;
+
+  @media (max-width: 500px) {
+    font-size: 26px;
+  }
 `;

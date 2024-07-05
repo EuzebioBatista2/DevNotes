@@ -50,6 +50,18 @@ class DashboardController {
       });
     }
 
+    const existFolder = await User.findOne({
+      _id: userId,
+      folders: { $elemMatch: { name: name } },
+    }).collation({ locale: "en", strength: 2 });
+
+    if (existFolder) {
+      return res.status(409).json({
+        message: "The folder name already exists.",
+        type: "error",
+      });
+    }
+
     const validColor = await colorValidation(color);
     if (validColor !== "Valid color.") {
       return res.status(422).json({
@@ -91,12 +103,32 @@ class DashboardController {
   }
 
   static async editFolder(req, res) {
-    const { _id, name, color } = req.body;
+    const { _id, name, color, oldName } = req.body;
+
+    if (name === oldName) {
+      return res.status(409).json({
+        message: "Please choose a different folder name.",
+        type: "error",
+      });
+    }
 
     const validName = await folderNameValidation(name);
     if (validName !== "Valid name.") {
       return res.status(422).json({
         message: validName,
+        type: "error",
+      });
+    }
+
+    const user = req.user;
+    const existFolder = await User.findOne({
+      _id: user.id,
+      folders: { $elemMatch: { name: name } },
+    }).collation({ locale: "en", strength: 2 });
+
+    if (existFolder) {
+      return res.status(409).json({
+        message: "The folder name already exists.",
         type: "error",
       });
     }
@@ -109,7 +141,6 @@ class DashboardController {
       });
     }
 
-    const user = req.user;
     const userData = await User.findOne({
       _id: user.id,
       folders: { $elemMatch: { _id: _id } },
@@ -132,7 +163,7 @@ class DashboardController {
     try {
       await User.findByIdAndUpdate(user.id, userData);
       res.status(201).json({
-        message: "Folder created!",
+        message: "Folder updated successfully!",
         type: "success",
       });
     } catch (error) {
@@ -145,7 +176,14 @@ class DashboardController {
 
   static async updateFile(req, res) {
     const folderId = req.params.folderId;
-    const { _id, name } = req.body;
+    const { _id, name, oldName } = req.body;
+
+    if (name === oldName) {
+      return res.status(409).json({
+        message: "Please choose a different file name.",
+        type: "error",
+      });
+    }
 
     const validName = await fileNameValidation(name);
     if (validName !== "Valid name.") {
@@ -156,19 +194,9 @@ class DashboardController {
     }
 
     const user = req.user;
-    const folderData = await Folder.findOne({
+
+    const userData = await Folder.findOne({
       userId: user.id,
-    });
-
-    if (!folderData) {
-      return res.status(404).json({
-        message: "Folder not found.",
-        type: "error",
-      });
-    }
-
-    const userData = await User.findOne({
-      _id: user.id,
       folders: { $elemMatch: { _id: folderId } },
     });
 
@@ -179,27 +207,29 @@ class DashboardController {
       });
     }
 
-    const folderIndex = folderData.folders.findIndex(
+    const folderIndex = userData.folders.findIndex(
       (folder) => folder._id.toString() === folderId
     );
 
-    const fileIndex = folderData.folders[folderIndex].files.findIndex(
-      (file) => file._id.toString() === _id
+    const existFile = userData.folders[folderIndex].files.some(
+      (file) => file.name.toLowerCase() === name.toLowerCase()
     );
 
-    if (fileIndex === -1) {
-      return res.status(404).json({
-        message: "File not found.",
+    if (existFile) {
+      return res.status(409).json({
+        message: "The file name already exists.",
         type: "error",
       });
     }
 
-    folderData.folders[folderIndex].files[fileIndex].name = name;
-    userData.folders[folderIndex].name = name;
+    const fileIndex = userData.folders[folderIndex].files.findIndex(
+      (folder) => folder._id.toString() === _id
+    );
+
+    userData.folders[folderIndex].files[fileIndex].name = name;
 
     try {
-      await Folder.findOneAndUpdate({ userId: user.id }, folderData);
-      await User.findByIdAndUpdate(user.id, userData);
+      await Folder.findOneAndUpdate({ userId: user.id }, userData);
       res.status(200).json({
         message: "File updated successfully!",
         type: "success",
@@ -409,6 +439,17 @@ class DashboardController {
     const folderIndex = userData.folders.findIndex(
       (folder) => folder._id.toString() === folderId
     );
+
+    const existFile = userData.folders[folderIndex].files.some(
+      (file) => file.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (existFile) {
+      return res.status(409).json({
+        message: "The file name already exists.",
+        type: "error",
+      });
+    }
 
     const file = {
       _id: new ObjectId(),

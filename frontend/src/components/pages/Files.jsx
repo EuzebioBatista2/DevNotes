@@ -6,15 +6,17 @@ import Context from "../context/UserContext.jsx";
 import "suneditor/dist/css/suneditor.min.css";
 import { useParams } from "react-router-dom";
 import BreadCrumb from "../common/BreadCrumb.jsx";
+import Loading from "./Loading.jsx";
 
 export default function Files() {
   const { folderId } = useParams();
-  const { authenticated, getFiles } = useContext(Context);
+  const { authenticated, getFiles, loading, setLoading } = useContext(Context);
   const [user, setUser] = useState({});
   const [userFiles, setUserFiles] = useState([]);
   const [token] = useState(localStorage.getItem("devNotes@token") || "");
 
   useEffect(() => {
+    setLoading(true);
     async function fetchData() {
       const data = await authenticated(token);
       setUser(data);
@@ -32,13 +34,23 @@ export default function Files() {
     }
 
     fetchData();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, [token]);
 
   return (
-    <DashboardLayout>
-      <Nav name={user.name} />
-      <BreadCrumb />
-      <FileNav files={userFiles} folderId={folderId} />
-    </DashboardLayout>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <DashboardLayout>
+          <Nav name={user.name} />
+          <BreadCrumb />
+          <FileNav files={userFiles} folderId={folderId} />
+        </DashboardLayout>
+      )}
+    </>
   );
 }

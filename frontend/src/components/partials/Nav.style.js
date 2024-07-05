@@ -10,6 +10,10 @@ export const NavContainer = styled.nav`
   height: 70px;
   width: 100%;
   background-color: #ffecaa;
+
+  @media (max-width: 500px) {
+    padding: 20px 20px;
+  }
 `;
 
 export const NavLink = styled(Link)`

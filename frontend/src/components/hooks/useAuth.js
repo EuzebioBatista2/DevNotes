@@ -92,6 +92,7 @@ export default function useAuth() {
       msgText = error.response.data.message;
       type = error.response.data.type;
       localStorage.removeItem("devNotes@files");
+      localStorage.removeItem("devNotes@token");
       setFlashMessage(msgText, type);
       navigate("/login");
     }

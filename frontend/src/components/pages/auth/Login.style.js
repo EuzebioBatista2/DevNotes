@@ -37,6 +37,10 @@ export const LightText = styled.h2`
   font-size: 60px;
   font-weight: 300;
   color: #ffecaa;
+
+  @media (max-width: 500px) {
+    font-size: 50px;
+  }
 `;
 
 export const BoldText = styled.h2`
@@ -44,6 +48,10 @@ export const BoldText = styled.h2`
   font-weight: bold;
   color: #ffecaa;
   margin-top: -20px;
+
+  @media (max-width: 500px) {
+    font-size: 50px;
+  }
 `;
 
 export const LoginContainer = styled.div`

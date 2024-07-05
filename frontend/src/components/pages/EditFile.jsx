@@ -17,12 +17,14 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import { faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import Input from "../common/Input";
 import { useParams } from "react-router-dom";
+import Loading from "./Loading.jsx";
 
 export default function EditFile() {
   const { folderId, fileId } = useParams();
-  const { authenticated, getFile, updateFile } = useContext(Context);
+  const { authenticated, getFile, updateFile, loading, setLoading } =
+    useContext(Context);
   const [user, setUser] = useState({});
-  const [file, setFile] = useState({ _id: "", name: "" });
+  const [file, setFile] = useState({ _id: "", name: "", oldName: "" });
   const [token] = useState(localStorage.getItem("devNotes@token") || "");
 
   function handleChange(e) {
@@ -36,44 +38,60 @@ export default function EditFile() {
   }
 
   useEffect(() => {
+    setLoading(true);
     async function fetchData() {
       const data = await authenticated(token);
       const dataFile = await getFile(folderId, fileId);
       if (data && dataFile) {
         setUser(data);
-        setFile({ _id: dataFile._id, name: dataFile.name });
+        setFile({
+          _id: dataFile._id,
+          name: dataFile.name,
+          oldName: dataFile.name,
+        });
       }
     }
 
     fetchData();
-  }, [token, authenticated]);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, [token]);
 
   return (
-    <DashboardLayout>
-      <Nav name={user.name} />
-      <Container>
-        <FormContainer>
-          <HeaderContainer>
-            <Icon icon={faFileCircleCheck} />
-            <Title>Edit your file</Title>
-          </HeaderContainer>
-          <DataContainer onSubmit={handleSubmit}>
-            <Input
-              type={"text"}
-              text={"File name"}
-              name={"name"}
-              value={file.name}
-              placeholder={"Enter the file name"}
-              handelOnChange={handleChange}
-            />
-            <Buttons>
-              <AddButton>Update</AddButton>
-              <LinkButton to={`/dashboard/files/${folderId}`}>Back</LinkButton>
-            </Buttons>
-          </DataContainer>
-          <SubText>Edit the file and write your notes.</SubText>
-        </FormContainer>
-      </Container>
-    </DashboardLayout>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <DashboardLayout>
+          <Nav name={user.name} />
+          <Container>
+            <FormContainer>
+              <HeaderContainer>
+                <Icon icon={faFileCircleCheck} />
+                <Title>Edit your file</Title>
+              </HeaderContainer>
+              <DataContainer onSubmit={handleSubmit}>
+                <Input
+                  type={"text"}
+                  text={"File name"}
+                  name={"name"}
+                  value={file.name}
+                  placeholder={"Enter the file name"}
+                  handelOnChange={handleChange}
+                />
+                <Buttons>
+                  <AddButton>Update</AddButton>
+                  <LinkButton to={`/dashboard/files/${folderId}`}>
+                    Back
+                  </LinkButton>
+                </Buttons>
+              </DataContainer>
+              <SubText>Edit the file and write your notes.</SubText>
+            </FormContainer>
+          </Container>
+        </DashboardLayout>
+      )}
+    </>
   );
 }

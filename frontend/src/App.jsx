@@ -12,6 +12,7 @@ import Files from "./components/pages/Files.jsx";
 import NewFile from "./components/pages/NewFile.jsx";
 import Profile from "./components/pages/Profile.jsx";
 import EditFile from "./components/pages/EditFile.jsx";
+import NotFound from "./components/pages/NotFound.jsx";
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
-            {/* <Route path="*" element={<NotFound />} */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </MainLayout>
       </UserProvider>

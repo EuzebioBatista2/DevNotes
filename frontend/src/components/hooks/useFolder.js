@@ -108,7 +108,10 @@ export default function useFolder() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate("/dashboard/folders");
+      navigate("/");
+      setTimeout(() => {
+        navigate("/dashboard/folders");
+      }, 0);
     }
   }
 
@@ -281,9 +284,10 @@ export default function useFolder() {
 
     setFlashMessage(msgText, type);
     if (type === "success") {
-      navigate(`/dashboard/files/${folderId}`);
-      localStorage.removeItem("devNotes@files");
-      window.location.reload();
+      navigate("/");
+      setTimeout(() => {
+        navigate(`/dashboard/files/${folderId}`);
+      }, 0);
     } else if (type === "error") {
       navigate("/dashboard/folders");
     }

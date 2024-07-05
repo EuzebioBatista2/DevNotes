@@ -1,33 +1,30 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const HomeContainer = styled.div`
+export const Container = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   align-items: center;
   justify-content: center;
-  background-image: url("/images/HomeBackground.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  padding: 20px;
+  padding: 30px 20px;
 `;
 
-export const Logo = styled.img`
-  width: 250px;
+export const Image = styled.img`
   height: auto;
-  margin-bottom: 20px;
+  width: 320px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
-export const Title = styled.h1`
-  color: #ee0000;
-  font-size: 2.5em;
+export const Title = styled.h3`
+  font-size: 24px;
+  font-weight: bold;
+  color: #555555;
+  margin-top: -30px;
   text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 2.2em;
-  }
 `;
 
 export const LinkButton = styled(Link)`

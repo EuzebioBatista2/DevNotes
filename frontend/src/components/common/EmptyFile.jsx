@@ -1,5 +1,11 @@
-import { Container, Line, TextContainer, Text, Title } from "./EmptyFile.style";
-import { Icon } from "./EmptyFolder.style";
+import {
+  Container,
+  Line,
+  TextContainer,
+  Text,
+  Title,
+  Icon,
+} from "./EmptyFile.style";
 
 import {
   faFileCirclePlus,

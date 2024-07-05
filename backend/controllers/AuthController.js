@@ -149,9 +149,20 @@ class AuthController {
       currentPassword,
       user.password
     );
+
     if (!validCurrentPassword) {
       return res.status(422).json({
         message: "Current password isn't valid.",
+        type: "error",
+      });
+    }
+
+    if (
+      currentPassword === newPassword &&
+      currentPassword === confirmNewPassword
+    ) {
+      return res.status(409).json({
+        message: "Please choose a different password.",
         type: "error",
       });
     }

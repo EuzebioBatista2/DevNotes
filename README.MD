@@ -71,6 +71,11 @@ npm start
 
 ## Updates:
 
+- 1.0.0 - ✨ First version
+  - Loading page.
+  - 404 page.
+  - Responsive.
+  - Verifications on the creation and editing page.
 - 0.3.2 - 📝 Profile page
   - Cretion of profile page.
   - Change password.

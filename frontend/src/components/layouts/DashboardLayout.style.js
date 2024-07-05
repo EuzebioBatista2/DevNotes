@@ -4,7 +4,7 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 600px;
+  min-height: 740px;
   width: 100%;
   background-image: url("/images/HomeBackground.webp");
   background-repeat: no-repeat;

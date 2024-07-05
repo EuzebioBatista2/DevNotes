@@ -34,9 +34,13 @@ export const DataContainer = styled.div`
 `;
 
 export const LightText = styled.h2`
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 300;
   color: #deb1a0;
+
+  @media (max-width: 1200px) {
+    font-size: 35px;
+  }
 `;
 
 export const BoldText = styled.h2`
@@ -44,6 +48,10 @@ export const BoldText = styled.h2`
   font-weight: bold;
   color: #deb1a0;
   margin-top: -20px;
+
+  @media (max-width: 1200px) {
+    font-size: 50px;
+  }
 `;
 
 export const RegisterContainer = styled.div`

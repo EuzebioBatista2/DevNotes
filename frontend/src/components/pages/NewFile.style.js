@@ -7,6 +7,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 30px 20px;
 `;
 
 export const FormContainer = styled.div`
@@ -16,11 +17,14 @@ export const FormContainer = styled.div`
   justify-content: space-between;
   height: 500px;
   width: 400px;
-  min-width: 280px;
   padding: 30px 10px;
   background-color: transparent;
   border: 1px solid #000;
   border-radius: 4px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -46,6 +50,10 @@ export const DataContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const Buttons = styled.div`

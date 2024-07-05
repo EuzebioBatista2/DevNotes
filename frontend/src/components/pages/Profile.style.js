@@ -8,6 +8,14 @@ export const Container = styled.div`
   flex-direction: row;
   padding: 30px 50px;
   gap: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  @media (max-width: 500px) {
+    padding: 30px 20px;
+  }
 `;
 
 export const ProfileData = styled.aside`
@@ -20,6 +28,11 @@ export const ProfileData = styled.aside`
   border-radius: 4px;
   padding: 40px 0px;
   background-color: #ff0100aa;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 export const ProfileContainer = styled.div`
@@ -27,6 +40,10 @@ export const ProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const Text = styled.p`
@@ -94,6 +111,11 @@ export const InformationContainer = styled.section`
   justify-content: space-between;
   background-color: #f5e6e0aa;
   border-radius: 4px;
+
+  @media (max-width: 992px) {
+    height: 100%;
+    flex-direction: column;
+  }
 `;
 
 export const DataContainer = styled.div`
@@ -109,6 +131,10 @@ export const BasicInformation = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  @media (max-width: 992px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const TextsContainer = styled.div`
@@ -132,6 +158,10 @@ export const BasicDataContainer = styled.div`
   justify-content: center;
   height: 100%;
   padding: 0px 30px;
+
+  @media (max-width: 992px) {
+    padding: 25px 30px;
+  }
 `;
 
 export const InformationText = styled.p`
@@ -144,6 +174,10 @@ export const FormPassword = styled.form`
   flex-direction: column;
   width: 250px;
   gap: 10px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const PasswordButton = styled.button.attrs({ type: "submit" })`
@@ -180,6 +214,10 @@ export const ImageContainer = styled.div`
 export const ImageLogo = styled.img`
   height: auto;
   width: 250px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const TextAbout = styled.p`
@@ -187,6 +225,10 @@ export const TextAbout = styled.p`
   color: #555555;
   text-align: center;
   max-width: 500px;
+
+  @media (max-width: 992px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const FooterContainer = styled.footer`
@@ -194,6 +236,10 @@ export const FooterContainer = styled.footer`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 
 export const LinksContainer = styled.div`
@@ -202,6 +248,11 @@ export const LinksContainer = styled.div`
   align-items: center;
   width: 100%;
   gap: 20px;
+
+  @media (max-width: 992px) {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 `;
 
 export const FooterText = styled.p`
@@ -231,9 +282,18 @@ export const Icon = styled(FontAwesomeIcon)`
   color: #555555;
 `;
 
+export const CreditsContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100%;
+
+  @media (max-width: 992px) {
+    justify-content: center;
+  }
+`;
+
 export const CreditsText = styled.p`
   font-size: 16px;
   color: #555555;
-  text-align: end;
-  width: 100%;
+  text-align: center;
 `;
