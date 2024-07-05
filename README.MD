@@ -71,6 +71,8 @@ npm start
 
 ## Updates:
 
+- 1.0.3 - 🔧 File configurations(package.json)
+  - Npm start.
 - 1.0.2 - 🔧 File configurations
   - Node version.
   - Port.

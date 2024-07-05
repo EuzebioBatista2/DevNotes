@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js localhost 5000"
+    "dev": "nodemon ./index.js localhost 5000",
+    "start": "node ./index.js"
   },
   "keywords": [],
   "author": "Euzebio batista",
