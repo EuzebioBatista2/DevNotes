@@ -40,7 +40,8 @@ class DashboardController {
   }
 
   static async createFolder(req, res) {
-    const { name, color, userId } = req.body;
+    let { name, color, userId } = req.body;
+    name = name.trim();
 
     const validName = await folderNameValidation(name);
     if (validName !== "Valid name.") {
@@ -103,9 +104,11 @@ class DashboardController {
   }
 
   static async editFolder(req, res) {
-    const { _id, name, color, oldName } = req.body;
+    let { _id, name, color, oldName } = req.body;
+    name = name.trim();
+    oldName = oldName.trim();
 
-    if (name === oldName) {
+    if (name.toLowerCase() === oldName.toLowerCase()) {
       return res.status(409).json({
         message: "Please choose a different folder name.",
         type: "error",
@@ -176,9 +179,11 @@ class DashboardController {
 
   static async updateFile(req, res) {
     const folderId = req.params.folderId;
-    const { _id, name, oldName } = req.body;
+    let { _id, name, oldName } = req.body;
+    name = name.trim();
+    oldName = oldName.trim();
 
-    if (name === oldName) {
+    if (name.toLowerCase() === oldName.toLowerCase()) {
       return res.status(409).json({
         message: "Please choose a different file name.",
         type: "error",
@@ -406,7 +411,8 @@ class DashboardController {
     const { ObjectId } = mongoose.Types;
     const folderId = req.params.folderId;
 
-    const { name } = req.body;
+    let { name } = req.body;
+    name = name.trim();
 
     if (!ObjectId.isValid(folderId)) {
       return res.status(400).json({

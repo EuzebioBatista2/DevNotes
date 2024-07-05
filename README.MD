@@ -71,6 +71,9 @@ npm start
 
 ## Updates:
 
+- 1.0.1 - 📝 Metatags and validations
+  - Metatags.
+  - Add validations.
 - 1.0.0 - ✨ First version
   - Loading page.
   - 404 page.

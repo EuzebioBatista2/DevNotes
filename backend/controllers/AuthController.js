@@ -10,7 +10,8 @@ import Folder from "../models/Folder.js";
 
 class AuthController {
   static async login(req, res) {
-    const { email, password, remember } = req.body;
+    let { email, password, remember } = req.body;
+    email = email.toLowerCase();
 
     const validEmail = await emailValidation(email);
     if (validEmail !== "Valid email.") {
@@ -57,7 +58,9 @@ class AuthController {
 
   static async register(req, res) {
     let { name, email, password, confirmPassword } = req.body;
+    email = email.toLowerCase();
     name = name.charAt(0).toUpperCase() + name.slice(1);
+    name = name.trim();
 
     const validName = await nameValidation(name);
     if (validName !== "Valid name.") {
@@ -75,7 +78,10 @@ class AuthController {
       });
     }
 
-    const existEmail = await User.findOne({ email: email });
+    const existEmail = await User.findOne({ email: email }).collation({
+      locale: "en",
+      strength: 2,
+    });
 
     if (existEmail) {
       return res.status(409).json({
