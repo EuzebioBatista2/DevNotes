@@ -71,6 +71,8 @@ npm start
 
 ## Updates:
 
+- 1.0.6 - 🐛 Fix style
+  - Margin on ragister page.
 - 1.0.5 - 🔧 File configurations(vercel.json)
   - Add vercel.json.
 - 1.0.4 - 🔧 Update File configurations(package.json)

@@ -117,6 +117,7 @@ export const FooterContainer = styled.footer`
   align-items: center;
   width: 100%;
   gap: 20px;
+  margin-top: 40px;
 `;
 
 export const FooterText = styled.p`
