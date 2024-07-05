@@ -22,9 +22,9 @@ app.use("/dashboard", dashboardRoutes);
 
 mongoDB()
   .then(() => {
-    console.log("Database connected");
-    app.listen(5000, () => {
-      console.log("Server connected");
+    app.listen({
+      host: "0.0.0.0",
+      port: process.env.PORT ? Number(process.env.PORT) : 5000,
     });
   })
   .catch((error) => {

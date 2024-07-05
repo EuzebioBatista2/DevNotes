@@ -71,6 +71,9 @@ npm start
 
 ## Updates:
 
+- 1.0.2 - 🔧 File configurations
+  - Node version.
+  - Port.
 - 1.0.1 - 📝 Metatags and validations
   - Metatags.
   - Add validations.
