@@ -71,6 +71,8 @@ npm start
 
 ## Updates:
 
+- 1.0.10 - 🔧 Front File configurations(vercel.json)
+  - Add Vercel.json.
 - 1.0.9 - 🔧 File configurations(vercel.json)
   - Vercel.json.
   - Package.json.
