@@ -67,16 +67,18 @@ npm start
 
 ## Project images:
 
-<img src="./frontend/public/prints/Home.webp" width="49%" alt="Home page">
-<img src="./frontend/public/prints/Login.webp" width="49%" alt="Login page">
-<img src="./frontend/public/prints/Register.webp" width="49%" alt="Register page">
-<img src="./frontend/public/prints/Folders.webp" width="49%" alt="Folders page">
-<img src="./frontend/public/prints/EmptyFile.webp" width="49%" alt="File page">
-<img src="./frontend/public/prints/File.webp" width="49%" alt="File page">
-<img src="./frontend/public/prints/Profile.webp" width="49%" alt="Profile page">
+<img style="display: inline;" src="./frontend/public/prints/Home.webp" width="49%" alt="Home page">
+<img style="display: inline;" src="./frontend/public/prints/Login.webp" width="49%" alt="Login page">
+<img style="display: inline;" src="./frontend/public/prints/Register.webp" width="49%" alt="Register page">
+<img style="display: inline;" src="./frontend/public/prints/Folders.webp" width="49%" alt="Folders page">
+<img style="display: inline;" src="./frontend/public/prints/Emptyfile.webp" width="49%" alt="File page">
+<img style="display: inline;" src="./frontend/public/prints/File.webp" width="49%" alt="File page">
+<img style="display: inline;" src="./frontend/public/prints/Profile.webp" width="49%" alt="Profile page">
 
 ## Updates:
 
+- 1.1.1 - 🐛 Readme.md
+  - Src file.
 - 1.1.0 - 📸🐛 Fixed errors and updated documentation
   - Fixed bugs.
   - Snapshots.
