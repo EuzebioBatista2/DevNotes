@@ -1,5 +1,6 @@
 import {
   AuthContainer,
+  AuthLink,
   Logo,
   NavContainer,
   NavLink,
@@ -15,12 +16,12 @@ export default function Nav({ name }) {
       </NavLink>
 
       <AuthContainer>
-        <NavLink to="/dashboard/profile">
-          <UserName>{name}</UserName>
-        </NavLink>
-        <NavLink to="/dashboard/profile">
+        <AuthLink to="/dashboard/profile">
+          <UserName title={name}>{name}</UserName>
+        </AuthLink>
+        <AuthLink to="/dashboard/profile">
           <ProfileImage src="/images/imageProfile.webp" />
-        </NavLink>
+        </AuthLink>
       </AuthContainer>
     </NavContainer>
   );

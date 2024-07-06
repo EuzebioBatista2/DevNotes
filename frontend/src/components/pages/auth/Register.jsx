@@ -82,7 +82,9 @@ export default function Register() {
                 />
                 <Input
                   type={"password"}
-                  text={"Password"}
+                  text={
+                    "Password(8+ chars, 1 uppercase, 1 lowercase, 1 number, 1 special)"
+                  }
                   name={"password"}
                   placeholder={"Enter your password"}
                   handelOnChange={handleChange}

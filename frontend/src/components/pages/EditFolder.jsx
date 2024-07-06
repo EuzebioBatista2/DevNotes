@@ -51,7 +51,7 @@ export default function EditFolder() {
       setUser(data);
 
       const folder = await getFolder(id);
-      setFolder({ ...folder, oldName: folder.name });
+      setFolder({ ...folder, oldName: folder.name, oldColor: folder.color });
     }
 
     fetchData();

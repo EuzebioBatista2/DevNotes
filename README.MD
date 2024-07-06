@@ -67,10 +67,19 @@ npm start
 
 ## Project images:
 
-- Coming soon
+<img src="./frontend/public/prints/Home.webp" width="49%" alt="Home page">
+<img src="./frontend/public/prints/Login.webp" width="49%" alt="Login page">
+<img src="./frontend/public/prints/Register.webp" width="49%" alt="Register page">
+<img src="./frontend/public/prints/Folders.webp" width="49%" alt="Folders page">
+<img src="./frontend/public/prints/EmptyFile.webp" width="49%" alt="File page">
+<img src="./frontend/public/prints/File.webp" width="49%" alt="File page">
+<img src="./frontend/public/prints/Profile.webp" width="49%" alt="Profile page">
 
 ## Updates:
 
+- 1.1.0 - 📸🐛 Fixed errors and updated documentation
+  - Fixed bugs.
+  - Snapshots.
 - 1.0.10 - 🔧 Front File configurations(vercel.json)
   - Add Vercel.json.
 - 1.0.9 - 🔧 File configurations(vercel.json)

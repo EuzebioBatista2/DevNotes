@@ -104,13 +104,13 @@ class DashboardController {
   }
 
   static async editFolder(req, res) {
-    let { _id, name, color, oldName } = req.body;
+    let { _id, name, color, oldName, oldColor } = req.body;
     name = name.trim();
     oldName = oldName.trim();
 
-    if (name.toLowerCase() === oldName.toLowerCase()) {
+    if (name.toLowerCase() === oldName.toLowerCase() && color === oldColor) {
       return res.status(409).json({
-        message: "Please choose a different folder name.",
+        message: "Please choose a different folder name or color.",
         type: "error",
       });
     }
@@ -124,16 +124,18 @@ class DashboardController {
     }
 
     const user = req.user;
-    const existFolder = await User.findOne({
-      _id: user.id,
-      folders: { $elemMatch: { name: name } },
-    }).collation({ locale: "en", strength: 2 });
+    if (name != oldName) {
+      const existFolder = await User.findOne({
+        _id: user.id,
+        folders: { $elemMatch: { name: name } },
+      }).collation({ locale: "en", strength: 2 });
 
-    if (existFolder) {
-      return res.status(409).json({
-        message: "The folder name already exists.",
-        type: "error",
-      });
+      if (existFolder) {
+        return res.status(409).json({
+          message: "The folder name already exists.",
+          type: "error",
+        });
+      }
     }
 
     const validColor = await colorValidation(color);

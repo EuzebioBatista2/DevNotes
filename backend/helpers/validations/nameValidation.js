@@ -7,8 +7,8 @@ const nameValidation = async (name) => {
     return "At least 3 letters are required.";
   }
 
-  if (name.length > 30) {
-    return "Maximum of 30 letters allowed.";
+  if (name.length > 20) {
+    return "Maximum of 20 letters allowed.";
   }
 
   if (/\d/.test(name)) {

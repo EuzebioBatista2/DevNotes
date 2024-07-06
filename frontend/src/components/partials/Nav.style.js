@@ -35,6 +35,14 @@ export const AuthContainer = styled.div`
   gap: 10px;
 `;
 
+export const AuthLink = styled(Link)`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+  text-decoration: none;
+`;
+
 export const ProfileImage = styled.img`
   height: 50px;
   width: 50px;
@@ -46,4 +54,18 @@ export const UserName = styled.p`
   font-size: 18px;
   color: #555555;
   font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: nowrap;
+  text-align: end;
+  width: 100%;
+
+  @media (max-width: 400px) {
+    width: 70px;
+  }
+
+  @media (max-width: 340px) {
+    width: 40px;
+  }
 `;
