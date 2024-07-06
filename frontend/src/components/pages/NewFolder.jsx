@@ -33,7 +33,7 @@ export default function NewFolder() {
   function handleColorChange(e) {
     e.preventDefault();
     setColor(e.target.value);
-    setFolder({ ...folder, color: `${color}` });
+    setFolder({ ...folder, color: `${e.target.value}` });
   }
 
   function handleSubmit(e) {

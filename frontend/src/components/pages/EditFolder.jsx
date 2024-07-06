@@ -36,7 +36,7 @@ export default function EditFolder() {
   function handleColorChange(e) {
     e.preventDefault();
     setColor(e.target.value);
-    setFolder({ ...folder, color: `${color}` });
+    setFolder({ ...folder, color: `${e.target.value}` });
   }
 
   function handleSubmit(e) {
@@ -51,6 +51,7 @@ export default function EditFolder() {
       setUser(data);
 
       const folder = await getFolder(id);
+      setColor(folder.color);
       setFolder({ ...folder, oldName: folder.name, oldColor: folder.color });
     }
 
@@ -70,7 +71,7 @@ export default function EditFolder() {
           <Container>
             <FormContainer>
               <HeaderContainer>
-                <Icon icon={faFolderPlus} color={folder.color} />
+                <Icon icon={faFolderPlus} color={color} />
                 <Title>Edit your folder</Title>
               </HeaderContainer>
               <DataContainer onSubmit={handleSubmit}>
@@ -86,7 +87,7 @@ export default function EditFolder() {
                   type={"color"}
                   text={"Folder color"}
                   name={"color"}
-                  value={folder.color || "#000000"}
+                  value={color}
                   placeholder={"Select the folder color"}
                   handelOnChange={handleColorChange}
                 />
