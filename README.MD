@@ -71,6 +71,9 @@ npm start
 
 ## Updates:
 
+- 1.0.9 - 🔧 File configurations(vercel.json)
+  - Vercel.json.
+  - Package.json.
 - 1.0.8 - 🔧 File configurations(vercel.json)
   - Add Build.
   - Update port.
