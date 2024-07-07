@@ -16,9 +16,11 @@ export const Icon = styled(FontAwesomeIcon)`
 export const MainText = styled.h3`
   font-size: 32px;
   color: #555555;
+  text-align: center;
 `;
 
 export const SubText = styled.p`
   font-size: 20px;
   color: #787878;
+  text-align: center;
 `;

@@ -77,6 +77,8 @@ npm start
 
 ## Updates:
 
+- 1.1.5 - 📝 Text
+  - Align text on the EmptyFolder component.
 - 1.1.4 - 🔧 Text-overflow
   - Extending the file name.
 - 1.1.3 - 🐛 Verifyfolder function
