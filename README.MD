@@ -77,6 +77,8 @@ npm start
 
 ## Updates:
 
+- 1.1.3 - 🐛 Verifyfolder function
+  - Getewat timout.
 - 1.1.2 - 🐛 Color input
   - Fixed color input.
 - 1.1.1 - 🐛 Readme.md

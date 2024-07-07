@@ -396,10 +396,13 @@ class DashboardController {
     }
 
     const user = req.user;
-    const userData = await Folder.findOne({
-      userId: user.id,
-      folders: { $elemMatch: { _id: folderId } },
-    });
+    const userData = await Folder.findOne(
+      {
+        userId: user.id,
+        folders: { $elemMatch: { _id: folderId } },
+      },
+      { "folders.$": 1 }
+    );
 
     if (!userData) {
       return res.status(404).json({
@@ -407,6 +410,8 @@ class DashboardController {
         type: "error",
       });
     }
+
+    res.status(200).json({ message: "Folder verified successfully" });
   }
 
   static async createFile(req, res) {
