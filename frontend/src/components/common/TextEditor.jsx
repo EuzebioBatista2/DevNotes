@@ -43,11 +43,16 @@ export default function TextEditor({ id }) {
     const sunEditor = document.querySelector(".sun-editor");
     const sunEditorContainer = document.querySelector(".se-wrapper");
     const sunEditorText = document.querySelector(".sun-editor-editable");
+    const navToolbar = document.querySelector(".se-toolbar");
 
     if (sunEditor && sunEditorContainer && sunEditorText) {
       sunEditor.style.height = "100%";
       sunEditorContainer.style.height = "100%";
       sunEditorText.style.height = "100%";
+
+      navToolbar.style.position = "sticky";
+      navToolbar.style.top = "0";
+      navToolbar.style.zIndex = "100";
     }
   }, []);
 

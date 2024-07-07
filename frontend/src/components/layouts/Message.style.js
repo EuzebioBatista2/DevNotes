@@ -25,7 +25,7 @@ export const MessageContainer = styled.div`
       ? "#f5c6cb"
       : "transparent"};
   border-radius: 4px;
-  z-index: 30;
+  z-index: 110;
   overflow: hidden;
   transition: height 300ms ease-in-out, padding 300ms ease-in-out;
 
