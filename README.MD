@@ -77,6 +77,8 @@ npm start
 
 ## Updates:
 
+- 1.1.4 - 🔧 Text-overflow
+  - Extending the file name.
 - 1.1.3 - 🐛 Verifyfolder function
   - Getewat timout.
 - 1.1.2 - 🐛 Color input

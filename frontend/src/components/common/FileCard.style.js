@@ -30,6 +30,9 @@ export const TagFile = styled.div`
 export const FileName = styled.p`
   font-size: 16px;
   color: #555555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: fit-content;
 `;
 
 export const ButtonsContainer = styled.div`
