@@ -37,6 +37,7 @@ export default function TextEditor({ id }) {
       ["save"],
     ],
     callBackSave: saveToDatabase,
+    defaultStyle: "font-family: Arial; font-size: 16px;",
   };
 
   useEffect(() => {

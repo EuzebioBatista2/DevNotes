@@ -53,14 +53,14 @@ export default function Register() {
         <Loading />
       ) : (
         <AuthContainer image={"RegisterBackground.webp"}>
-          <TitleContainer>
-            <IconLink to="/">
-              <Icon icon={faLeftLong} />
-            </IconLink>
-            <Title>DevNotes</Title>
-          </TitleContainer>
           <DataContainer>
             <TextContainer>
+              <TitleContainer>
+                <IconLink to="/">
+                  <Icon icon={faLeftLong} />
+                </IconLink>
+                <Title>DevNotes</Title>
+              </TitleContainer>
               <LightText>Your first time?</LightText>
               <BoldText>welcome</BoldText>
             </TextContainer>

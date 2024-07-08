@@ -73,14 +73,14 @@ export default function Login() {
         <Loading />
       ) : (
         <AuthContainer image={"LoginBackground.webp"}>
-          <TitleContainer>
-            <IconLink to="/">
-              <Icon icon={faLeftLong} />
-            </IconLink>
-            <Title>DevNotes</Title>
-          </TitleContainer>
           <DataContainer>
             <TextContainer>
+              <TitleContainer>
+                <IconLink to="/">
+                  <Icon icon={faLeftLong} />
+                </IconLink>
+                <Title>DevNotes</Title>
+              </TitleContainer>
               <LightText>Hello,</LightText>
               <BoldText>welcome</BoldText>
             </TextContainer>

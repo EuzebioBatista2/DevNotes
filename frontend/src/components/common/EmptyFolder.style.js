@@ -5,6 +5,7 @@ export const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 0px;
 `;
 
 export const Icon = styled(FontAwesomeIcon)`

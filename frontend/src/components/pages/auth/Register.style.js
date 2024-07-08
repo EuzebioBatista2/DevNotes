@@ -2,6 +2,19 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
+export const DataContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -17,20 +30,6 @@ export const Title = styled.h1`
 
 export const IconLink = styled(Link)`
   text-decoration: none;
-`;
-
-export const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const DataContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
 `;
 
 export const LightText = styled.h2`
@@ -117,7 +116,7 @@ export const FooterContainer = styled.footer`
   align-items: center;
   width: 100%;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 export const FooterText = styled.p`
