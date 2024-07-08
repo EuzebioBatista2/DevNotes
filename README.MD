@@ -77,6 +77,8 @@ npm start
 
 ## Updates:
 
+- 1.1.8 - 🔧 Resize screen
+  - Resize display mobile.
 - 1.1.7 - 🔧 Screen size
   - Scroll.
   - 750px -> 650px.
