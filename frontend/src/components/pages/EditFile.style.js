@@ -21,6 +21,7 @@ export const FormContainer = styled.div`
   background-color: transparent;
   border: 1px solid #000;
   border-radius: 4px;
+  cursor: pointer;
 
   @media (max-width: 500px) {
     width: 100%;

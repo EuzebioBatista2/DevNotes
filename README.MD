@@ -77,6 +77,8 @@ npm start
 
 ## Updates:
 
+- 1.1.10 - 📝 Updated form button
+  - Add curso -> pointer.
 - 1.1.9 - 🔧 Resize screen(Home)
   - 100vh -> 100%.
 - 1.1.8 - 🔧 Resize screen
